@@ -26,6 +26,10 @@ func main() {
 }
 
 func run(ctx context.Context, args []string, stdout, stderr io.Writer) error {
+	if len(args) == 0 || args[0] == "help" || args[0] == "--help" || args[0] == "-h" {
+		printHelp(stdout)
+		return nil
+	}
 	global := flag.NewFlagSet("notioncrawl", flag.ContinueOnError)
 	global.SetOutput(stderr)
 	configPath := global.String("config", "", "config file path")
