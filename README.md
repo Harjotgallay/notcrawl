@@ -60,6 +60,13 @@ Default paths:
 - `subscribe` clones a share repo and imports the latest snapshot
 - `update` pulls and imports a subscribed share repo
 
+## Distribution
+
+Release packaging is managed with GoReleaser. Tagged releases build tarballs,
+checksums, `.deb`, `.rpm`, GitHub release notes, and a Homebrew tap update.
+
+See [`docs/distribution.md`](docs/distribution.md) for release operations.
+
 ## Safety Model
 
 Desktop mode is read-only. It snapshots Notion's local SQLite database before
