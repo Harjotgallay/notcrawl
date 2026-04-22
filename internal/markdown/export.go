@@ -63,7 +63,7 @@ func (e Exporter) writePage(ctx context.Context, page store.Page) (string, error
 		return "", err
 	}
 	spaceSlug := notiontext.Slug(spaceName)
-	titleSlug := notiontext.Slug(page.Title)
+	titleSlug := maxSlug(notiontext.Slug(page.Title), 96)
 	name := fmt.Sprintf("%s-%s.md", titleSlug, notiontext.ShortID(page.ID))
 	path := filepath.Join(e.Dir, spaceSlug, name)
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
@@ -213,4 +213,15 @@ func formatMS(ms int64) string {
 		return ""
 	}
 	return time.UnixMilli(ms).UTC().Format(time.RFC3339)
+}
+
+func maxSlug(s string, max int) string {
+	if len(s) <= max {
+		return s
+	}
+	s = strings.TrimRight(s[:max], "-")
+	if s == "" {
+		return "untitled"
+	}
+	return s
 }
