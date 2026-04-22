@@ -1,0 +1,112 @@
+name-template: "notioncrawl v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
+change-title-escapes: '\<*_&'
+no-changes-template: "- No merged pull requests in this release."
+
+categories:
+  - title: "Features"
+    labels:
+      - "feature"
+      - "enhancement"
+      - "feat"
+  - title: "Fixes"
+    labels:
+      - "bug"
+      - "fix"
+  - title: "Maintenance"
+    labels:
+      - "perf"
+      - "chore"
+      - "ci"
+      - "build"
+      - "dependencies"
+      - "dep"
+      - "deps"
+      - "docs"
+      - "refactor"
+      - "test"
+      - "tests"
+  - title: "Other Changes"
+    labels:
+      - "other"
+
+exclude-labels:
+  - "skip-changelog"
+  - "no-changelog"
+
+version-resolver:
+  major:
+    labels:
+      - "major"
+  minor:
+    labels:
+      - "feat"
+      - "feature"
+      - "enhancement"
+  patch:
+    labels:
+      - "bug"
+      - "fix"
+      - "perf"
+      - "chore"
+      - "ci"
+      - "build"
+      - "dependencies"
+      - "dep"
+      - "deps"
+      - "docs"
+      - "refactor"
+      - "test"
+      - "tests"
+      - "other"
+  default: patch
+
+autolabeler:
+  - label: "feat"
+    title:
+      - '/^feat(\(.+\))?:/i'
+  - label: "fix"
+    title:
+      - '/^fix(\(.+\))?:/i'
+  - label: "bug"
+    title:
+      - '/^bug(\(.+\))?:/i'
+  - label: "perf"
+    title:
+      - '/^perf(\(.+\))?:/i'
+  - label: "refactor"
+    title:
+      - '/^refactor(\(.+\))?:/i'
+  - label: "docs"
+    title:
+      - '/^docs(\(.+\))?:/i'
+  - label: "build"
+    title:
+      - '/^build(\(.+\))?:/i'
+  - label: "ci"
+    title:
+      - '/^ci(\(.+\))?:/i'
+  - label: "test"
+    title:
+      - '/^test(\(.+\))?:/i'
+  - label: "chore"
+    title:
+      - '/^chore(\(.+\))?:/i'
+  - label: "dependencies"
+    title:
+      - '/^(dep|deps|dependencies)(\(.+\))?:/i'
+  - label: "other"
+    title:
+      - '/.*/'
+
+template: |
+  ## notioncrawl v$RESOLVED_VERSION
+
+  local-first Notion crawling into SQLite, normalized Markdown, and git-backed snapshots.
+
+  ### what's new
+  $CHANGES
+
+  ### contributors
+  $CONTRIBUTORS
