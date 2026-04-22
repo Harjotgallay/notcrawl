@@ -1,0 +1,19 @@
+db_path = "~/.notioncrawl/notioncrawl.db"
+cache_dir = "~/.notioncrawl/cache"
+markdown_dir = "~/.notioncrawl/pages"
+
+[notion.desktop]
+enabled = true
+path = ""
+
+[notion.api]
+enabled = true
+token_env = "NOTION_TOKEN"
+base_url = "https://api.notion.com/v1"
+version = "2022-06-28"
+
+[share]
+remote = ""
+branch = "main"
+repo_path = "~/.notioncrawl/share"
+stale_after = "1h"
