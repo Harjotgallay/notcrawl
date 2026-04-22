@@ -101,7 +101,32 @@ func snapshotDB(path, cacheDir string) (string, error) {
 	if _, err := io.Copy(out, in); err != nil {
 		return "", err
 	}
+	for _, suffix := range []string{"-wal", "-shm"} {
+		src := path + suffix
+		if _, err := os.Stat(src); err == nil {
+			if err := copyFile(src, outPath+suffix, 0o600); err != nil {
+				return "", err
+			}
+		} else if !os.IsNotExist(err) {
+			return "", err
+		}
+	}
 	return outPath, nil
+}
+
+func copyFile(src, dst string, perm os.FileMode) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	out, err := os.OpenFile(dst, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, perm)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	_, err = io.Copy(out, in)
+	return err
 }
 
 func ingestSpaces(ctx context.Context, st *store.Store, db *sql.DB) (int, error) {
