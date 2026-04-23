@@ -1,3 +1,5 @@
+<img src="docs/notcrawl_banner.jpg" alt="notcrawl banner"/>
+
 # notcrawl
 
 `notcrawl` mirrors Notion workspace data into local SQLite and normalized
