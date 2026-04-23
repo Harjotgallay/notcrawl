@@ -24,22 +24,33 @@ to without holding Notion credentials.
 - compressed JSONL git-share snapshots plus import/update workflows
 - read-only SQL access for ad hoc inspection
 
-## Quick Start
+## Install
 
 ```bash
-go build -o bin/notcrawl ./cmd/notcrawl
-bin/notcrawl init
-bin/notcrawl doctor
-bin/notcrawl sync --source desktop
-bin/notcrawl export-md
-bin/notcrawl search "launch plan"
+brew tap vincentkoc/tap
+brew install notcrawl
 ```
 
-For API sync:
+You can also download archives, `.deb`, or `.rpm` packages from the
+[latest release](https://github.com/vincentkoc/notcrawl/releases/latest).
+
+## Quick Start
+
+Use the local Notion Desktop cache:
+
+```bash
+notcrawl init
+notcrawl doctor
+notcrawl sync --source desktop
+notcrawl export-md
+notcrawl search "launch plan"
+```
+
+Or use the official Notion API:
 
 ```bash
 export NOTION_TOKEN="secret_..."
-bin/notcrawl sync --source api
+notcrawl sync --source api
 ```
 
 Default paths:
